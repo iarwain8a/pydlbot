@@ -6,4 +6,4 @@ def request_soup(url):
     return soup
 
 def get_tag(tag,atributes,className,soup):
-    return soup.body.find(tag, attrs={atributes:className}).text
+    return soup.body.find(tag, attrs={atributes:className})
