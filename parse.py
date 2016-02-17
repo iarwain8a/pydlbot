@@ -12,14 +12,12 @@ def only_letters(text):
             aux = aux + char
     return aux
 
-def get_link(text):
+def get_magnet_link(text):
     aux = ""
     cont = 0
     for char in text:
         if (char == '"'):
-            cont=cont+1
+            cont = cont +1
         if (cont == 1):
             aux = aux + char
-            if (aux == '"'):
-                aux = ""
-    return aux
+    return aux[1:]
