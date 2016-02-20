@@ -1,0 +1,1 @@
+Start cmd.exe /k "%~dp0/pydlbot_ui.py"

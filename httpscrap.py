@@ -1,9 +1,12 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-def request_soup(url):
-    soup = BeautifulSoup(urlopen(url),"html.parser")
-    return soup
+class BeautifulScrap:
+	def __init__(self,url):
+		self.soup = BeautifulSoup(urlopen(url),"html.parser")
 
-def get_tag(tag,atributes,className,soup):
-    return soup.body.find(tag, attrs={atributes:className})
+	def request_soup(self):
+	    return self.soup
+
+	def get_tag(self,tag,atributes,className):
+	    return self.soup.body.find(tag, attrs={atributes:className})

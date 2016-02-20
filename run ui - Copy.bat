@@ -1,0 +1,1 @@
+Sart cmd.exe /k "C:\Python34\Lib\site-packages\PyQt5\pyuic5.bat %~dp0/pydlbot.ui -o %~dp0/pydlbot_ui.py"
