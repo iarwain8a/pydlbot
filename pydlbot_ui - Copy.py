@@ -7,13 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import UiLogic
 
 class Ui_MainWindow(object):
-    i = 2
-    j = 2
-    rows = 2
-    cols = 2
+    cont = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(755, 459)
@@ -54,23 +50,11 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.verticalLayout_2, 1, 1, 1, 1)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(self.cols)
-        self.tableWidget.setRowCount(self.rows)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setItem(0, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setItem(0, 1, item)
-        self.horizontalLayout_3.addWidget(self.tableWidget)
+        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
+        self.listWidget.setObjectName("listWidget")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        self.horizontalLayout_3.addWidget(self.listWidget)
         self.gridLayout.addLayout(self.horizontalLayout_3, 1, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -80,12 +64,25 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(MainWindow)
+        self.addtext.returnPressed.connect(self.listWidget.reset)
+        self.pushButton_5.pressed.connect(self.listWidget.clearSelection)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.pushButton_3.clicked.connect(self.addItem())
+        self.pushButton_3.clicked.connect(self.puta)
+        #self.addtext.returnPressed.connect()
 
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Escape:
+            self.close()
 
+    def puta(self):
+        self.cont = self.cont + 1
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = self.listWidget.item(self.cont)
+        text = self.addtext.text()
+        item.setText(text)
+        
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -95,19 +92,9 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "Edit"))
         self.pushButton_3.setText(_translate("MainWindow", "Download now"))
         self.pushButton_5.setText(_translate("MainWindow", "Delete"))
-        item = self.tableWidget.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "1"))
-        item = self.tableWidget.verticalHeaderItem(1)
-        item.setText(_translate("MainWindow", "2"))
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "file name"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Download every"))
-        __sortingEnabled = self.tableWidget.isSortingEnabled()
-        self.tableWidget.setSortingEnabled(False)
-        item = self.tableWidget.item(0, 0)
+        __sortingEnabled = self.listWidget.isSortingEnabled()
+        self.listWidget.setSortingEnabled(False)
+        item = self.listWidget.item(0)
         item.setText(_translate("MainWindow", "flash"))
-        item = self.tableWidget.item(0, 1)
-        item.setText(_translate("MainWindow", "week"))
-        self.tableWidget.setSortingEnabled(__sortingEnabled)
+        self.listWidget.setSortingEnabled(__sortingEnabled)
 
