@@ -7,11 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import UiLogic
+
 
 class Ui_MainWindow(object):
-    i = 2
-    j = 2
     rows = 2
     cols = 2
     def setupUi(self, MainWindow):
@@ -83,9 +81,29 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.pushButton_3.clicked.connect(self.addItem())
+        self.add.clicked.connect(self.addItem)
+        if (self.addtext.text() != ""):
+            self.puta()
 
+    def puta(self):
+        item = self.tableWidget.item(self.rows-2, 0)
+        item.setText("puta")
 
+    def addItem(self):
+        self.addRow()
+        text = self.addtext.text()
+        item = self.tableWidget.item(self.rows-2, 0)
+        item.setText(text)
+        item = self.tableWidget.item(self.rows-2, 1)
+        #item.setText(text)
+    
+    def addRow(self):
+        self.rows = self.rows + 1
+        self.tableWidget.setRowCount(self.rows)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(self.rows-2, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(self.rows-2, 1, item)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
