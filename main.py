@@ -8,9 +8,20 @@ import time
 import threading
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
+	p = threading.Thread(target=main)
+        p.start()
+        for i in range(3):
+                t = threading.Thread(target=f,args=(i,))
+                t.start()
+
+def main():
+	app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui.Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+def f(id):
+    print ("thread function",id)
+    return
